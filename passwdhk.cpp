@@ -57,16 +57,16 @@ HANDLE hExecProgMutex;
 // The password change has been done
 NTSTATUS NTAPI PasswordChangeNotify(PUNICODE_STRING username, ULONG relativeid, PUNICODE_STRING password)
 {
-	pshk_exec_prog(PSHK_POST_CHANGE, username, password);
+	pshk_exec_prog(PSHK_POST_CHANGE, username, password, FALSE);
 	return STATUS_SUCCESS;
 }
 
 
 // This is the pre-password change function 
 // A password change has been requested
-BOOL NTAPI PasswordFilter(PUNICODE_STRING username, PUNICODE_STRING FullName, PUNICODE_STRING password, BOOL SetOperation)
+BOOL NTAPI PasswordFilter(PUNICODE_STRING username, PUNICODE_STRING FullName, PUNICODE_STRING password, BOOLEAN SetOperation)
 {
-	int retVal = pshk_exec_prog(PSHK_PRE_CHANGE, username, password);
+	int retVal = pshk_exec_prog(PSHK_PRE_CHANGE, username, password, SetOperation);
 	return retVal == PSHK_SUCCESS ? TRUE : FALSE;
 }
 

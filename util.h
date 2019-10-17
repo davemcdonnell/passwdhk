@@ -45,4 +45,4 @@ LPWSTR alloc_copy(LPWSTR src, size_t length);
 LPWSTR pshk_struct2str();
 LPWSTR rawurlencode(LPWSTR src);
 LPWSTR doublequote(LPWSTR src);
-int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING password);
+int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING password, BOOLEAN SetOperation);

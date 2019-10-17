@@ -176,7 +176,7 @@ LPWSTR doublequote(LPWSTR src)
 
 // Calls the needed program with supplied user.
 //
-int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING password)
+int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING password, BOOLEAN SetOperation)
 {
 	wchar_t *buffer, *prog, *args;
 	wchar_t *usernameCopy;
@@ -184,7 +184,7 @@ int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING passwor
 	wchar_t *usernameCopy2;
 #endif
 	wchar_t *passwordCopy, *passwordCopy2;
-	wchar_t *bufferFormat = L"\"%s\" %s %s %s";
+	wchar_t *bufferFormat = L"\"%s\" %s %s %s %d";
 	int wait;
 	bool skipComp;
 	int ret = PSHK_SUCCESS;
@@ -306,7 +306,7 @@ int pshk_exec_prog(int option, PUNICODE_STRING username, PUNICODE_STRING passwor
 				SecureZeroMemory(buffer, bufferBytes);
 			}
 	
-			_snwprintf_s(buffer, bufferChars, bufferChars - 1, bufferFormat, prog, args, usernameCopy, passwordCopy);
+			_snwprintf_s(buffer, bufferChars, bufferChars - 1, bufferFormat, prog, args, usernameCopy, passwordCopy, SetOperation);
 
 			// Wipe password and free copies
 			SecureZeroMemory(passwordCopy, wcslen(passwordCopy) * sizeof(wchar_t));
